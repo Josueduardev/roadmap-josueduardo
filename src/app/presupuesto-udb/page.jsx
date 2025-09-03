@@ -1,58 +1,67 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { Calculator, DollarSign, Briefcase, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import {
+  Calculator,
+  DollarSign,
+  Briefcase,
+  ArrowLeft,
+  University,
+} from "lucide-react";
 
 export default function BudgetCalculator() {
-  const [hasScholarship, setHasScholarship] = useState(true);
-  const [scholarshipPercentage, setScholarshipPercentage] = useState(50);
+  const [hasFirstYearSupport, setHasFirstYearSupport] = useState(false);
   const router = useRouter();
 
   const calculations = useMemo(() => {
-    const baseMensuality = 750; // Costo base mensual
-    const transportCost = 35; // Transporte fijo mensual
-    const foodCost = 100; // Comida fija mensual
     const fixedIncome = 75; // Pensión de sobrevivencia
 
-    // Calcular mensualidad con beca
-    const scholarshipDiscount = hasScholarship
-      ? scholarshipPercentage / 100
-      : 0;
-    const discountedMensuality = baseMensuality * (1 - scholarshipDiscount);
+    // Gastos mensuales fijos
+    const monthlyTuition = 100;
+    const transportCost = 40;
+    const foodCost = 80;
 
-    // Calcular totales de gastos
-    const totalMonthlyExpenses =
-      discountedMensuality + transportCost + foodCost;
-    const totalYearly = totalMonthlyExpenses * 12;
-    const totalCareer = totalYearly * 5; // 5 años de carrera
+    // Gastos por ciclo (6 meses)
+    const enrollmentCost = 40;
+    const academicServicesCost = 50;
+    const labCost = 150;
 
-    // Calcular saldo mensual (gastos - ingresos fijos)
-    const balance = totalMonthlyExpenses - fixedIncome;
+    // Calcular promedios y totales
+    const totalMonthlyFixed = monthlyTuition + transportCost + foodCost;
+    const totalCycleFixed = enrollmentCost + academicServicesCost + labCost;
+    const totalCycleExpenses = totalMonthlyFixed * 5 + totalCycleFixed;
+    const totalYearlyExpenses = totalCycleExpenses * 2;
+    const averageMonthlyExpenses = totalYearlyExpenses / 10;
+
+    const careerLength = hasFirstYearSupport ? 2 : 3;
+    const totalCareerExpenses = totalYearlyExpenses * careerLength;
+
+    const balance = averageMonthlyExpenses - fixedIncome;
 
     // Calcular rango salarial necesario
-    const minSalary = Math.ceil(balance + 15); // mínimo 15 arriba de gastos
+    const minSalary = Math.ceil(balance + 32);
     const maxSalary = minSalary + 100;
 
     return {
-      baseMensuality,
-      discountedMensuality,
+      monthlyTuition,
       transportCost,
       foodCost,
-      totalMonthlyExpenses,
-      totalYearly,
-      totalCareer,
-      scholarshipAmount: baseMensuality * scholarshipDiscount,
-      fixedIncome,
+      enrollmentCost,
+      academicServicesCost,
+      labCost,
+      totalMonthlyFixed,
+      totalCycleFixed,
+      totalCycleExpenses,
+      totalYearlyExpenses,
+      averageMonthlyExpenses,
       balance,
+      totalCareerExpenses,
+      fixedIncome,
       minSalary,
       maxSalary,
     };
-  }, [hasScholarship, scholarshipPercentage]);
-
-  const handleBack = () => {
-    router.push("/");
-  };
+  }, [hasFirstYearSupport]);
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
@@ -62,8 +71,6 @@ export default function BudgetCalculator() {
     }).format(amount);
   };
 
-  const scholarshipOptions = Array.from({ length: 17 }, (_, i) => 20 + i * 5);
-
   return (
     <div
       className="min-h-screen bg-[#0f172a] py-16"
@@ -72,41 +79,43 @@ export default function BudgetCalculator() {
           "radial-gradient(circle 600px at 50% 50%, rgba(59, 130, 246, 0.3), transparent)",
       }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-4">
         <ArrowLeft
           color="white"
-          className="w-6 h-6 cursor-pointer transition-all duration-300 ease-out hover:translate-x-[-4px] hover:opacity-80"
-          onClick={handleBack}
+          className="size-8 cursor-pointer transition-all duration-300 ease-out hover:translate-x-[-4px] hover:opacity-80"
+          onClick={() => router.back()}
         />
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Image
-              src="/assets/key-institute-logo.svg"
-              alt="Key Institute"
+              src="/assets/udb-logo-blanco.svg"
+              alt="Universidad Don Bosco"
               width={400}
               height={300}
             />
           </div>
-          <h2 className="text-xl text-gray-300 mb-2">
-            Calculadora de Presupuesto para estudiar en Key Institute
+          <h2 className="text-xl py-4 text-gray-300 mb-2">
+            Calculadora de Presupuesto para continuar estudiando
+            <br />{" "}
+            <strong>Ingeniería en Ciencias de la Computación en la UDB</strong>
           </h2>
         </div>
 
         {/* Controls */}
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6 border border-white/20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Scholarship Toggle */}
+            {/* First Year Support Toggle */}
             <div className="space-y-4">
               <label className="text-white font-semibold flex items-center gap-2">
                 <Calculator className="w-5 h-5 text-blue-300" />
-                ¿Tengo alguna beca?
+                ¿Tengo apoyo para cubrir el 1er año de Ingeniería?
               </label>
               <div className="flex gap-4">
                 <button
-                  onClick={() => setHasScholarship(true)}
+                  onClick={() => setHasFirstYearSupport(true)}
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                    hasScholarship
+                    hasFirstYearSupport
                       ? "bg-blue-700 text-white shadow-lg shadow-blue-500/30"
                       : "bg-white/10 text-gray-300 hover:bg-white/20"
                   }`}
@@ -114,9 +123,9 @@ export default function BudgetCalculator() {
                   Sí
                 </button>
                 <button
-                  onClick={() => setHasScholarship(false)}
+                  onClick={() => setHasFirstYearSupport(false)}
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                    !hasScholarship
+                    !hasFirstYearSupport
                       ? "bg-blue-700 text-white shadow-lg shadow-blue-500/30"
                       : "bg-white/10 text-gray-300 hover:bg-white/20"
                   }`}
@@ -125,33 +134,6 @@ export default function BudgetCalculator() {
                 </button>
               </div>
             </div>
-
-            {/* Scholarship Percentage */}
-            {hasScholarship && (
-              <div className="space-y-4">
-                <label className="text-white font-semibold flex items-center gap-2">
-                  <DollarSign className="w-5 h-5 text-green-300" />
-                  Porcentaje de Beca
-                </label>
-                <select
-                  value={scholarshipPercentage}
-                  onChange={(e) =>
-                    setScholarshipPercentage(Number(e.target.value))
-                  }
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white backdrop-blur-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                >
-                  {scholarshipOptions.map((percentage) => (
-                    <option
-                      key={percentage}
-                      value={percentage}
-                      className="bg-gray-800 text-white"
-                    >
-                      {percentage}%
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
           </div>
         </div>
 
@@ -174,49 +156,55 @@ export default function BudgetCalculator() {
                         Concepto
                       </th>
                       <th className="text-right py-4 px-4 text-gray-300 font-semibold">
-                        Monto Mensual
+                        Monto
                       </th>
                     </tr>
                   </thead>
                   <tbody className="space-y-2">
                     <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
-                      <td className="py-4 px-4 text-white">Mensualidad Base</td>
-                      <td className="py-4 px-4 text-right text-gray-400 line-through">
-                        {formatCurrency(calculations.baseMensuality)}
+                      <td className="py-4 px-4 text-white">Cuota Mensual</td>
+                      <td className="py-4 px-4 text-right text-white">
+                        {formatCurrency(calculations.monthlyTuition)}
                       </td>
                     </tr>
-
-                    {hasScholarship && (
-                      <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
-                        <td className="py-4 px-4 text-green-300">
-                          Descuento por Beca ({scholarshipPercentage}%)
-                        </td>
-                        <td className="py-4 px-4 text-right text-green-300">
-                          -{formatCurrency(calculations.scholarshipAmount)}
-                        </td>
-                      </tr>
-                    )}
-
                     <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
                       <td className="py-4 px-4 text-white">
-                        Mensualidad {hasScholarship ? "con Beca" : "sin Beca"}
+                        Transporte Mensual
                       </td>
-                      <td className="py-4 px-4 text-right text-white font-semibold">
-                        {formatCurrency(calculations.discountedMensuality)}
-                      </td>
-                    </tr>
-
-                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
-                      <td className="py-4 px-4 text-white">Transporte</td>
                       <td className="py-4 px-4 text-right text-white">
                         {formatCurrency(calculations.transportCost)}
                       </td>
                     </tr>
-
                     <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
-                      <td className="py-4 px-4 text-white">Alimentación</td>
+                      <td className="py-4 px-4 text-white">
+                        Alimentación Mensual
+                      </td>
                       <td className="py-4 px-4 text-right text-white">
                         {formatCurrency(calculations.foodCost)}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
+                      <td className="py-4 px-4 text-white">
+                        Matrícula por ciclo
+                      </td>
+                      <td className="py-4 px-4 text-right text-white">
+                        {formatCurrency(calculations.enrollmentCost)}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
+                      <td className="py-4 px-4 text-white">
+                        Servicios Académicos por ciclo
+                      </td>
+                      <td className="py-4 px-4 text-right text-white">
+                        {formatCurrency(calculations.academicServicesCost)}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
+                      <td className="py-4 px-4 text-white">
+                        Laboratorios por ciclo
+                      </td>
+                      <td className="py-4 px-4 text-right text-white">
+                        {formatCurrency(calculations.labCost)}
                       </td>
                     </tr>
                   </tbody>
@@ -255,14 +243,14 @@ export default function BudgetCalculator() {
                         {formatCurrency(calculations.fixedIncome)}
                       </td>
                     </tr>
-
                     <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
-                      <td className="py-4 px-4 text-white">Saldo a cubrir</td>
+                      <td className="py-4 px-4 text-white">
+                        Gasto Mensual Promedio a cubrir
+                      </td>
                       <td className="py-4 px-4 text-right text-white font-semibold">
                         {formatCurrency(calculations.balance)}
                       </td>
                     </tr>
-
                     <tr className="border-b border-white/10 hover:bg-white/5 transition-colors duration-200">
                       <td className="py-4 px-4 text-blue-300 flex items-center gap-2 font-bold">
                         <Briefcase className="w-5 h-5" /> Ingreso Necesario
@@ -280,17 +268,30 @@ export default function BudgetCalculator() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
           {/* Monthly Total */}
           <div className="bg-gradient-to-br from-blue-900/20 to-blue-700/20 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/30">
             <div className="text-center">
               <h4 className="text-blue-300 font-semibold mb-2">
-                Total Mensual de Gastos
+                Gasto Mensual Promedio
               </h4>
               <p className="text-3xl font-bold text-white mb-1">
-                {formatCurrency(calculations.totalMonthlyExpenses)}
+                {formatCurrency(calculations.averageMonthlyExpenses)}
               </p>
               <p className="text-blue-200 text-sm">Por mes</p>
+            </div>
+          </div>
+
+          {/* Cycle Total */}
+          <div className="bg-gradient-to-br from-indigo-900/20 to-indigo-700/20 backdrop-blur-lg rounded-2xl p-6 border border-indigo-500/30">
+            <div className="text-center">
+              <h4 className="text-indigo-300 font-semibold mb-2">
+                Total por Ciclo
+              </h4>
+              <p className="text-3xl font-bold text-white mb-1">
+                {formatCurrency(calculations.totalCycleExpenses)}
+              </p>
+              <p className="text-indigo-200 text-sm">5 meses</p>
             </div>
           </div>
 
@@ -301,9 +302,9 @@ export default function BudgetCalculator() {
                 Total Anual
               </h4>
               <p className="text-3xl font-bold text-white mb-1">
-                {formatCurrency(calculations.totalYearly)}
+                {formatCurrency(calculations.totalYearlyExpenses)}
               </p>
-              <p className="text-indigo-200 text-sm">Por año</p>
+              <p className="text-indigo-200 text-sm">Por año (2 ciclos)</p>
             </div>
           </div>
 
@@ -314,26 +315,24 @@ export default function BudgetCalculator() {
                 Total Carrera
               </h4>
               <p className="text-3xl font-bold text-white mb-1">
-                {formatCurrency(calculations.totalCareer)}
+                {formatCurrency(calculations.totalCareerExpenses)}
               </p>
-              <p className="text-green-200 text-sm">5 años completos</p>
+              <p className="text-green-200 text-sm">
+                {hasFirstYearSupport ? "2 años completos" : "3 años completos"}
+              </p>
             </div>
           </div>
         </div>
 
         {/* Savings Indicator */}
-        {hasScholarship && (
+        {hasFirstYearSupport && (
           <div className="mt-6 bg-gradient-to-r from-green-900/20 to-green-700/20 backdrop-blur-lg rounded-2xl p-6 border border-green-500/30">
             <div className="text-center">
               <h4 className="text-green-300 font-semibold mb-2">
-                💰 Ahorro Total por Beca
+                💰 Ahorro Total por Apoyo del 1er Año
               </h4>
               <p className="text-2xl font-bold text-white mb-1">
-                {formatCurrency(calculations.scholarshipAmount * 12 * 5)}
-              </p>
-              <p className="text-green-200">
-                Ahorro {formatCurrency(calculations.scholarshipAmount)}{" "}
-                mensuales durante 5 años
+                {formatCurrency(calculations.totalYearlyExpenses)}
               </p>
             </div>
           </div>
