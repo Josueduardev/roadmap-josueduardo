@@ -66,7 +66,9 @@ export const Options = ({
         </div>
         <div className="mt-auto pt-4">
           <Link href={link} className="block w-full">
-            <Button className="w-full cursor-pointer">Ver costos</Button>
+            <Button className="w-full bg-blue-700 cursor-pointer">
+              Ver costos
+            </Button>
           </Link>
         </div>
       </CardContent>

@@ -8,21 +8,14 @@ import { Carrusel } from "@/components/Carrusel"
 import { Options } from "@/components/Options";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { FeaturesComparison } from "@/components/FeaturesComparison";
+import { Timeline } from "@/components/Timeline";
 
 import {
   GraduationCap,
-  MapPin,
-  Clock,
-  DollarSign,
-  Users,
-  Briefcase,
   Code,
   Target,
-  CheckCircle,
-  ArrowRight,
-  BookOpen,
   Award,
-  TrendingUp,
+  Computer
 } from "lucide-react"
 
 const fadeInUp = {
@@ -114,85 +107,14 @@ export default function CareerPresentation() {
                   <Target className="w-5 h-5 text-primary" />
                   <span>Enfocado en Desarrollo de Software</span>
                 </div>
+                <div className="flex items-center gap-3">
+                  <Computer className="w-5 h-5 text-primary" />
+                  <span>Aprendiendo Fundamentos de AI</span>
+                </div>
               </div>
             </motion.div>
             <motion.div variants={fadeInUp}>
               <Carrusel />
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Estado Actual */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            className="text-3xl font-bold text-center text-foreground mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Dónde Estoy Ahora
-          </motion.h2>
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid grid-cols-2 gap-8"
-          >
-            <motion.div variants={fadeInUp}>
-              <Card className="h-full">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BookOpen className="w-5 h-5 text-primary" />
-                    Estudios
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Último ciclo de Técnico en Ingeniería en Computación. Preparándome para la transición a nivel
-                    universitario.
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={fadeInUp}>
-              <Card className="h-full">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-primary" />
-                    Ubicación
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      <span className="text-sm">UDB: 3 horas de viaje</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      <span className="text-sm">Key Institute: 5 horas de viaje</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={fadeInUp}>
-              <Card className="h-full">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5 text-primary" />
-                    Retos
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">
-                    Balancear tiempo de viaje, costos educativos y oportunidades de crecimiento profesional.
-                  </p>
-                </CardContent>
-              </Card>
             </motion.div>
           </motion.div>
         </div>
@@ -273,6 +195,31 @@ export default function CareerPresentation() {
             </motion.div>
           </div>
         </section>
+
+        {/* Timeline de Decisión */}
+        <section className="py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2
+              className="text-3xl font-bold text-center text-foreground mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Cronograma de Decisión
+            </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Timeline />
+            </motion.div>
+          </div>
+        </section>
+
+
+        {/* Timeline de fechas */}
         {/* 
         <section className="py-16 px-4">
           <div className="max-w-6xl mx-auto">
@@ -295,14 +242,14 @@ export default function CareerPresentation() {
           </div>
         </section> */}
 
-      </section>
+        {/* Footer */}
+        <footer className="pt-8 px-4">
+          <div className="max-w-6xl mx-auto text-center">
+            <p className="text-shadow-muted-foreground text-lg">© {new Date().getFullYear()} Josué García - Presentación de Plan de Carrera Profesional</p>
+          </div>
+        </footer>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t bg-card">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-muted-foreground">© {new Date().getFullYear()} Josué García - Presentación de Plan de Carrera Profesional</p>
-        </div>
-      </footer>
+      </section>
     </div>
   )
 }
