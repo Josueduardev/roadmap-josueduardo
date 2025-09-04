@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Carrusel } from "@/components/Carrusel"
 import { Options } from "@/components/Options";
 import { ComparisonTable } from "@/components/ComparisonTable";
@@ -15,7 +16,8 @@ import {
   Code,
   Target,
   Award,
-  Computer
+  Computer,
+  User
 } from "lucide-react"
 
 const fadeInUp = {
@@ -244,8 +246,35 @@ export default function CareerPresentation() {
 
         {/* Footer */}
         <footer className="pt-8 px-4">
-          <div className="max-w-6xl mx-auto text-center">
-            <p className="text-shadow-muted-foreground text-lg">© {new Date().getFullYear()} Josué García - Presentación de Plan de Carrera Profesional</p>
+          <div className="max-w-6xl mx-auto text-center space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="lg"
+                      className=" cursor-wait gap-2 px-6 py-3 rounded-xl font-medium 
+                      bg-gradient-to-r from-blue-700 to-blue-500 
+                      text-white shadow-lg hover:shadow-xl 
+                      transition-all duration-300"
+                    >
+                      <User className="w-5 h-5" />
+                      Ver Portafolio
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>EN PROCESO…</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </motion.div>
+
+            <p className="text-muted-foreground text-lg">© {new Date().getFullYear()} Josué García - Presentación de Plan de Carrera Profesional</p>
           </div>
         </footer>
 
