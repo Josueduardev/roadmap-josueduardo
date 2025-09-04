@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Carrusel } from "@/components/Carrusel"
 import { Options } from "@/components/Options";
+import { ComparisonTable } from "@/components/ComparisonTable";
+import { FeaturesComparison } from "@/components/FeaturesComparison";
 
 import {
   GraduationCap,
@@ -39,9 +41,15 @@ const staggerContainer = {
 
 export default function CareerPresentation() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white" style={{
+      background: "white",
+      backgroundImage: `linear-gradient(to right, rgba(59,130,246,0.25) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(59,130,246,0.25) 1px, transparent 1px),
+      radial-gradient(circle at 50% 50%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.15) 40%, transparent 80%)`,
+      backgroundSize: "32px 32px, 32px 32px, 100% 100%"
+    }}>
       {/* Hero Section */}
-      <section className="relative py-20 px-4 text-center bg-gradient-to-br from-primary/5 to-accent/5">
+      <section className="relative py-20 px-4 text-center">
         <motion.div
           className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
@@ -116,7 +124,7 @@ export default function CareerPresentation() {
       </section>
 
       {/* Estado Actual */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             className="text-3xl font-bold text-center text-foreground mb-12"
@@ -199,7 +207,7 @@ export default function CareerPresentation() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Opciones Académicas Disponibles
+            Opciones Académicas Posibles
           </motion.h2>
           <motion.div
             variants={staggerContainer}
@@ -211,8 +219,8 @@ export default function CareerPresentation() {
             {/* Opción 1: UDB */}
             <motion.div variants={fadeInUp}>
               <Options
-                image="udb-logo.png"
                 university="Universidad Don Bosco"
+                image="udb-logo.png"
                 description="Continuar Ingeniería con Equivalencia"
                 years="3 años restantes"
                 travelTime="3 horas de viaje diario"
@@ -220,6 +228,7 @@ export default function CareerPresentation() {
                 aspect1="Equivalencia de materias"
                 aspect2="Especialización técnica"
                 aspect3="Continuidad técnica"
+                aspect4="Posibilidad de estudiar y trabajar"
                 link="/presupuesto-udb"
               />
             </motion.div>
@@ -227,150 +236,65 @@ export default function CareerPresentation() {
             {/* Opción 2: Key Institute */}
             <motion.div variants={fadeInUp}>
               <Options
-                image="key-logo.svg"
                 university="Key Institute"
+                image="key-logo.svg"
                 description="Comenzar de nuevo y reforzar conocimientos"
                 years="5 años restantes"
                 travelTime="5 horas de viaje diario"
-                payment="Pago completo de matrícula"
+                payment="Pago parcial de matrícula"
                 aspect1="Metodología innovadora"
                 aspect2="Proyectos reales"
                 aspect3="Red profesional"
+                aspect4="Posibilidad de estudiar y trabajar"
                 link="/presupuesto-key"
               />
             </motion.div>
           </motion.div>
         </div>
-      </section>
 
-      {/* Meta Profesional */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.h2
-            className="text-3xl font-bold text-foreground mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Mi Meta Profesional
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-8 mb-8"
-          >
-            <div className="flex items-center justify-center mb-6">
-              <div className="bg-primary/20 rounded-full p-4">
-                <Code className="w-12 h-12 text-primary" />
-              </div>
-            </div>
-            <h3 className="text-2xl font-bold text-foreground mb-4">Desarrollador de Software Senior</h3>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Convertirme en un desarrollador de software altamente capacitado, especializado en tecnologías modernas,
-              con capacidad de liderazgo técnico y contribución significativa a proyectos innovadores.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-6"
-          >
-            <motion.div variants={fadeInUp}>
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <Target className="w-8 h-8 text-primary mx-auto mb-4" />
-                  <h4 className="font-semibold mb-2">Especialización Técnica</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Dominio de frameworks modernos, arquitecturas escalables y mejores prácticas
-                  </p>
-                </CardContent>
-              </Card>
+        {/* Comparación Financiera */}
+        <section className="py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2
+              className="text-3xl font-bold text-center text-foreground mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Comparación Financiera
+            </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <ComparisonTable />
             </motion.div>
-            <motion.div variants={fadeInUp}>
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <Users className="w-8 h-8 text-primary mx-auto mb-4" />
-                  <h4 className="font-semibold mb-2">Liderazgo Técnico</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Capacidad de guiar equipos, mentorear desarrolladores junior y tomar decisiones técnicas
-                  </p>
-                </CardContent>
-              </Card>
+          </div>
+        </section>
+        {/* 
+        <section className="py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2
+              className="text-3xl font-bold text-center text-foreground mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Comparación de Características y Ventajas
+            </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <FeaturesComparison />
             </motion.div>
-            <motion.div variants={fadeInUp}>
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <TrendingUp className="w-8 h-8 text-primary mx-auto mb-4" />
-                  <h4 className="font-semibold mb-2">Impacto Profesional</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Contribuir a proyectos que generen valor real y transformación digital
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section> */}
 
-      {/* Plan de Acción */}
-      <section className="py-16 px-4 bg-muted/30">
-        <div className="max-w-4xl mx-auto">
-          <motion.h2
-            className="text-3xl font-bold text-center text-foreground mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Próximos Pasos
-          </motion.h2>
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            {[
-              "Evaluar detalladamente costos y beneficios de cada opción",
-              "Visitar ambas instituciones para conocer instalaciones y metodologías",
-              "Consultar con profesionales del sector sobre perspectivas laborales",
-              "Analizar opciones de financiamiento y becas adicionales",
-              "Definir cronograma de decisión para el próximo ciclo académico",
-              "Preparar documentación necesaria para el proceso de admisión",
-            ].map((step, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="flex items-start gap-4 p-4 bg-card rounded-lg border"
-              >
-                <div className="bg-primary/20 rounded-full p-2 mt-1">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-foreground">{step}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="text-center mt-12"
-          >
-            <Button size="lg" className="gap-2">
-              Comenzar Evaluación
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </motion.div>
-        </div>
       </section>
 
       {/* Footer */}

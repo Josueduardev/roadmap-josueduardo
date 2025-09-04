@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import { Calculator, DollarSign, Briefcase, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
+import { formatCurrency } from "../../components/BudgetCalculator";
 export default function BudgetCalculator() {
   const [hasScholarship, setHasScholarship] = useState(false);
   const [scholarshipPercentage, setScholarshipPercentage] = useState(50);
@@ -52,14 +52,6 @@ export default function BudgetCalculator() {
 
   const handleBack = () => {
     router.push("/");
-  };
-
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    }).format(amount);
   };
 
   const scholarshipOptions = Array.from({ length: 17 }, (_, i) => 20 + i * 5);

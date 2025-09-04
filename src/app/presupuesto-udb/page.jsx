@@ -109,7 +109,7 @@ export default function BudgetCalculator() {
             <div className="space-y-4">
               <label className="text-white font-semibold flex items-center gap-2">
                 <Calculator className="w-5 h-5 text-blue-300" />
-                ¿Tengo apoyo para cubrir el 1er año de Ingeniería?
+                ¿Tengo apoyo para cubrir el 1° año de Ingeniería?
               </label>
               <div className="flex gap-4">
                 <button
