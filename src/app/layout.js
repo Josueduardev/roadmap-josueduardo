@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Planes de Carrera - Josué García",
+  title: "Plan de Carrera - Josué García",
   description: "Sitio web de Josué García, Desarrollador Web que busca continuar su carrera en el mundo de la tecnología. En constante aprendizaje y con ganas de superarse cada día más.",
 };
 
