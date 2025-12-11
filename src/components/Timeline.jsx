@@ -25,7 +25,7 @@ export const Timeline = () => {
         "Evaluación de conocimientos para ingreso a la carrera de Ingeniería en Desarrollo de Software",
       icon: <BookOpen className="w-6 h-6" />,
       color: "#3B82F6",
-      status: "current",
+      status: "completed",
     },
     {
       date: "30 de septiembre",
@@ -35,7 +35,7 @@ export const Timeline = () => {
         "Inicio de búsqueda activa de oportunidades de trabajo part-time o pasantías",
       icon: <Briefcase className="w-6 h-6" />,
       color: "#10B981",
-      status: "pending",
+      status: "completed",
     },
     {
       date: "1 de octubre",
@@ -45,7 +45,7 @@ export const Timeline = () => {
         "Entrevista personal para evaluación de perfil y motivación académica",
       icon: <Target className="w-6 h-6" />,
       color: "#8B5CF6",
-      status: "pending",
+      status: "completed",
     },
     {
       date: "6 de octubre",
@@ -54,7 +54,7 @@ export const Timeline = () => {
       description: "Culminación de prácticas profesionales en Key Institute",
       icon: <CheckCircle className="w-6 h-6" />,
       color: "#059669",
-      status: "pending",
+      status: "completed",
     },
     {
       date: "13 de octubre",
@@ -64,7 +64,7 @@ export const Timeline = () => {
         "Finalización de todos los proyectos de las materias universitarias",
       icon: <GraduationCap className="w-6 h-6" />,
       color: "#DC2626",
-      status: "pending",
+      status: "completed",
     },
     {
       date: "27 de octubre",
@@ -73,7 +73,7 @@ export const Timeline = () => {
       description: "Finalización de ciclo",
       icon: <Award className="w-6 h-6" />,
       color: "#EA580C",
-      status: "pending",
+      status: "completed",
     },
     {
       date: "8 de noviembre",
@@ -83,7 +83,7 @@ export const Timeline = () => {
         "Conocimiento de resultados de beca y disponibilidad para continuar con equivalencia en UDB",
       icon: <CheckCircle className="w-6 h-6" />,
       color: "#7C3AED",
-      status: "pending",
+      status: "completed",
     },
     {
       date: "9 de noviembre",
@@ -93,7 +93,7 @@ export const Timeline = () => {
         "Tomar la decisión final sobre qué universidad elegir para continuar estudiando",
       icon: <Target className="w-6 h-6" />,
       color: "#DB2777",
-      status: "pending",
+      status: "completed",
     },
     {
       date: "Enero 2025",

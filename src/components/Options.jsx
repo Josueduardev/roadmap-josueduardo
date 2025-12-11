@@ -40,7 +40,7 @@ export const Options = ({
           {description}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4 flex-grow flex flex-col">
+      <CardContent className="space-y-4 flex-grow grid grid-cols-2 gap-4">
         <div className="space-y-3 flex-grow">
           <div className="flex items-center gap-2">
             <Clock className="w-4 h-4 text-muted-foreground flex-shrink-0" />
@@ -55,7 +55,7 @@ export const Options = ({
             <span className="text-md">{payment}</span>
           </div>
         </div>
-        <div className="pt-4 flex-grow">
+        <div className="space-y-3 flex-grow">
           <h4 className="font-semibold mb-2">Aspectos Clave:</h4>
           <ul className="space-y-1 text-md text-muted-foreground">
             <li>• {aspect1}</li>

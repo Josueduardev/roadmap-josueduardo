@@ -138,34 +138,16 @@ export default function CareerPresentation() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid grid-cols-2 gap-8"
+            className="grid gap-8"
           >
-            {/* Opción 1: UDB */}
-            <motion.div variants={fadeInUp}>
-              <Options
-                university="Universidad Don Bosco"
-                image="udb-logo.png"
-                description="Continuar Ingeniería con Equivalencia"
-                years="3 años restantes"
-                travelTime="3 horas de viaje diario"
-                payment="Pago completo de matrícula"
-                aspect1="Equivalencia de materias"
-                aspect2="Especialización técnica"
-                aspect3="Continuidad técnica"
-                aspect4="Posibilidad de estudiar y trabajar"
-                link="/presupuesto-udb"
-              />
-            </motion.div>
-
-            {/* Opción 2: Key Institute */}
             <motion.div variants={fadeInUp}>
               <Options
                 university="Key Institute"
                 image="key-logo.svg"
-                description="Comenzar de nuevo y reforzar conocimientos"
+                description="Reforzar conocimientos"
                 years="5 años restantes"
-                travelTime="5 horas de viaje diario"
-                payment="Pago parcial de matrícula"
+                travelTime="3 horas de viaje diario"
+                payment="Beca completa de la matrícula"
                 aspect1="Metodología innovadora"
                 aspect2="Proyectos reales"
                 aspect3="Red profesional"
